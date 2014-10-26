@@ -42,9 +42,8 @@ def parseSearchResults(xml):
 
 	return urls;
 
-key = getAccountKey()
-fetchedResults = getSearchResults('xbox', key)
-urls = parseSearchResults(fetchedResults)
-
-print (urls)
+# key = getAccountKey()
+# fetchedResults = getSearchResults('xbox', key)
+# urls = parseSearchResults(fetchedResults)
+# print (urls)
 
