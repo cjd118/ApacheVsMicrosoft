@@ -20,4 +20,4 @@ def getValidStatus(requestUrl):
 		return ('valid')
 
 # test function
-print(getValidStatus('http://www.microsoft.co.uk'))
+# print(getValidStatus('http://www.microsoft.co.uk'))
