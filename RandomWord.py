@@ -12,4 +12,4 @@ def loadWordList(wordlist):
 
 def getRandomWord(wordlist):
 
-	return random.choice(wordlist)
+	return random.choice(wordlist).rstrip('\n')
