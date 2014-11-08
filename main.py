@@ -4,12 +4,12 @@ import BingSearchResults
 import ServerSniffer
 import random
 
-testCount = 2
+testCount = 10
 bingAccountKey = BingSearchResults.getAccountKey()
+wordlist = RandomWord.loadWordList('/wordlist/wordlist.txt')
 
 for x in range(0, testCount):
 
-	wordlist = RandomWord.loadWordList('/wordlist/wordlist.txt')
 	word = RandomWord.getRandomWord(wordlist)
 
 	searchUrls = BingSearchResults.parseSearchResults( BingSearchResults.getSearchResults(str(word), bingAccountKey) )
