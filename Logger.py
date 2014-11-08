@@ -7,5 +7,5 @@ def createLog():
 def writeLog(data, f):
 	f.write(data)
 
-f = createLog()
-writeLog('hello\n', f)
+# f = createLog()
+# writeLog('hello\n', f)

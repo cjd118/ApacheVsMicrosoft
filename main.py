@@ -3,10 +3,12 @@ import RandomWord
 import BingSearchResults
 import ServerSniffer
 import random
+import Logger
 
 testCount = 10
 bingAccountKey = BingSearchResults.getAccountKey()
 wordlist = RandomWord.loadWordList('/wordlist/wordlist.txt')
+log = Logger.createLog()
 
 for x in range(0, testCount):
 
@@ -22,5 +24,8 @@ for x in range(0, testCount):
 
 	if (validStatus[0] == 'invalid'):
 		print('Errors: {0} / Warnings: {1}'.format(validStatus[1], validStatus[2]))
+		Logger.writeLog(testUrl + ',' + server + ',' + 'invalid' + ',' + validStatus[1] + ',' + validStatus[2] + '\n',log)
+	else:
+		Logger.writeLog(testUrl + ',' + server + ',' + 'valid\n',log)
 
 	print('\n\n')
