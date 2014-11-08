@@ -17,7 +17,7 @@ def getValidStatus(requestUrl):
 
 		return ('invalid', errorCount.group(0), warningCount.group(0))
 	else:	
-		return ('valid')
+		return (['valid'])
 
 # test function
 # print(getValidStatus('http://www.microsoft.co.uk'))
