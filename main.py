@@ -14,31 +14,36 @@ scrapedDomains = set()
 
 for x in range(0, testCount):
 
-	word = RandomWord.getRandomWord(wordlist)
+	try:
 
-	searchUrls = BingSearchResults.parseSearchResults( BingSearchResults.getSearchResults(str(word), bingAccountKey) )
+		word = RandomWord.getRandomWord(wordlist)
 
-	testUrl = random.choice(searchUrls)
+		searchUrls = BingSearchResults.parseSearchResults( BingSearchResults.getSearchResults(str(word), bingAccountKey) )
 
-	#check domain hasn't already been scraped
-	parsedTestUrl = urllib.parse.urlparse(testUrl)
-	testDomain = parsedTestUrl.netloc
+		testUrl = random.choice(searchUrls)
 
-	print('Checking if domain {0} has already been scraped...'.format(testDomain))
+		#check domain hasn't already been scraped
+		parsedTestUrl = urllib.parse.urlparse(testUrl)
+		testDomain = parsedTestUrl.netloc
 
-	if (testDomain not in scrapedDomains):
+		print('Checking if domain {0} has already been scraped...'.format(testDomain))
 
-		scrapedDomains.add(testDomain)
+		if (testDomain not in scrapedDomains):
 
-		server = ServerSniffer.sniffHeaders(testUrl)
-		validStatus = HtmlValidator.getValidStatus(testUrl)
+			scrapedDomains.add(testDomain)
 
-		print('Testing URL {0}\n Server: {1}\n validStatus: {2}'.format(testUrl, server, validStatus[0]))
+			server = ServerSniffer.sniffHeaders(testUrl)
+			validStatus = HtmlValidator.getValidStatus(testUrl)
 
-		if (validStatus[0] == 'invalid'):
-			print('Errors: {0} / Warnings: {1}'.format(validStatus[1], validStatus[2]))
-			Logger.writeLog(testUrl + ',' + server + ',' + 'invalid' + ',' + validStatus[1] + ',' + validStatus[2] + '\n',log)
-		else:
-			Logger.writeLog(testUrl + ',' + server + ',' + 'valid\n',log)
+			print('Testing URL {0}\n Server: {1}\n validStatus: {2}'.format(testUrl, server, validStatus[0]))
 
-		print('\n\n')
+			if (validStatus[0] == 'invalid'):
+				print('Errors: {0} / Warnings: {1}'.format(validStatus[1], validStatus[2]))
+				Logger.writeLog(testUrl + ',' + server + ',' + 'invalid' + ',' + validStatus[1] + ',' + validStatus[2] + '\n',log)
+			else:
+				Logger.writeLog(testUrl + ',' + server + ',' + 'valid\n',log)
+
+			print('\n\n')
+
+	except Exception:
+		continue
